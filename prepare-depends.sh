@@ -3,6 +3,14 @@
 
 set -x -e
 
+DEBUG=off
+if [ $# -ge 1 ]; then
+  if [ $1 = "debug" ]; then
+    echo "Setting debug flags"
+    DEBUG=on
+  fi
+fi
+
 DEPSRC=./depsrc
 DEPINST=./depinst
 
@@ -11,10 +19,10 @@ mkdir -p $DEPINST
 mkdir -p $DEPSRC
 
 cd $DEPSRC
-[ ! -d xbyak ] && git clone git://github.com/herumi/xbyak.git
-[ ! -d ate-pairing ] && git clone git://github.com/herumi/ate-pairing.git
+[ ! -d xbyak ] && git clone https://github.com/herumi/xbyak.git
+[ ! -d ate-pairing ] && git clone https://github.com/marmolejo/ate-pairing.git
 cd ate-pairing
-make -j SUPPORT_SNARK=1
+make -j SUPPORT_SNARK=1 DBG=$DEBUG
 cd ..
 cd ..
 cp -rv $DEPSRC/ate-pairing/include $DEPINST/

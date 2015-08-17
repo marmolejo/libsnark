@@ -6,7 +6,7 @@
 #* @copyright  MIT license (see LICENSE file)
 #*******************************************************************************/
 
-CXXFLAGS += -O2 -Wall -Wextra -Wno-unused-parameter -Wno-comment -march=native -mtune=native -std=c++11
+CXXFLAGS += -Wall -Wextra -Wno-unused-parameter -Wno-comment -march=native -mtune=native -std=c++11
 
 DEPSRC=depsrc
 DEPINST=depinst
@@ -168,13 +168,13 @@ ifeq ($(CPPDEBUG),1)
 endif
 
 ifeq ($(DEBUG),1)
-        CXXFLAGS += -DDEBUG -ggdb3
+        CXXFLAGS += -DDEBUG -ggdb3 -O0
 endif
 
 ifeq ($(PERFORMANCE),1)
         CXXFLAGS += -flto -fuse-linker-plugin
         CXXFLAGS += -march=native -mtune=native
-        CXXFLAGS += -DNDEBUG
+        CXXFLAGS += -DNDEBUG -O2
         LDFLAGS += -flto
 endif
 
